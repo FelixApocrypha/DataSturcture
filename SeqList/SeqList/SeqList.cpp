@@ -64,7 +64,48 @@ void ListInsert(SeqList& L)//插入
 	L.length++;
 	cout << "插入成功." << endl;
 }
-void ListTraverse(SeqList L)
+
+void ListDelete(SeqList& L)//删除
+{
+	int j;//要删除元素的位置
+	cout << "请输入要删除元素的位置：";
+	cin >> j;
+	for (size_t i = j-1; i <= L.length-1; i++)
+	{
+		L.elem[i] = L.elem[i + 1];
+		i++;
+	}
+	L.length--;
+	cout << "删除成功." << endl;
+}
+
+void ListAlter(SeqList& L)//修改
+{
+	int j;//要修改的元素位置
+	cout << "请输入要修改的元素位置：";
+	cin >> j;
+	int n;//修改后的值
+	cout << "请输入要修改的元素数据：";
+	cin >> n;
+	L.elem[j - 1] = n;
+	cout << "修改完成." << endl;
+}
+
+void ListLocate(SeqList L)//查找
+{
+	int e;//要查找的数据
+	cout << "请输入要查找的元素：";
+	cin >> e;
+	for (size_t i = 0; i <= L.length; i++)
+	{
+		if (L.elem[i]==e)
+		{
+			cout << i+1 << endl;
+		}
+	}
+}
+
+void ListTraverse(SeqList L) //遍历
 {
 	for(int i=0;i<=L.length-1;i++)
 	{
@@ -80,6 +121,11 @@ int main()
 	ListTraverse(L);
 	ListInsert(L);
 	ListTraverse(L);
+	ListDelete(L);
+	ListTraverse(L);
+	ListAlter(L);
+	ListTraverse(L);
+	ListLocate(L);
 	return 0;
 }
 
