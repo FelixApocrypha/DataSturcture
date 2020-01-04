@@ -73,7 +73,6 @@ void ListDelete(SeqList& L)//删除
 	for (size_t i = j-1; i <= L.length-1; i++)
 	{
 		L.elem[i] = L.elem[i + 1];
-		i++;
 	}
 	L.length--;
 	cout << "删除成功." << endl;
