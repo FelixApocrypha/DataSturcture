@@ -40,16 +40,16 @@ namespace MyDS
 	};
 }
 
-template<typename T>
-MyDS::SeqList<T>::SeqList(Size_t n, const Val_t& val) :size(n)
+template<typename Val_t>
+MyDS::SeqList<Val_t>::SeqList(Size_t n, const Val_t& val) :size(n)
 {
 	THROW_OUT_OF_RANGE_IF(!(n < MAX_SIZE), "SeqList<T> maximum capacity is 100.");
 	for(Size_t i = 0; i < n; ++i)
 		vals[i] = val;
 }
 
-template<typename T>
-MyDS::SeqList<T>::SeqList(std::initializer_list<Val_t> vList)
+template<typename Val_t>
+MyDS::SeqList<Val_t>::SeqList(std::initializer_list<Val_t> vList)
 {
 	THROW_OUT_OF_RANGE_IF(!(vList.size() < MAX_SIZE), "SeqList<T> maximum capacity is 100.");
 	std::copy(vList.begin(), vList.end(), vals);
@@ -59,7 +59,7 @@ MyDS::SeqList<T>::SeqList(std::initializer_list<Val_t> vList)
 template<typename Val_t>
 Val_t MyDS::SeqList<Val_t>::At(size_t n) 
 {
-	THROW_OUT_OF_RANGE_IF(!(n < size - 1), "SeqList<T>::At() subscript out of range.");
+	THROW_OUT_OF_RANGE_IF(!(n < size), "SeqList<T>::At() subscript out of range.");
 	return vals[n];
 }
 
