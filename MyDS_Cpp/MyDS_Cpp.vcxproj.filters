@@ -26,5 +26,8 @@
     <ClInclude Include="Include\exception_info.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Include\basic_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

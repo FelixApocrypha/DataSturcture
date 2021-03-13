@@ -144,6 +144,7 @@
     <ClCompile Include="MyDS_Cpp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\basic_list.h" />
     <ClInclude Include="Include\exception_info.h" />
     <ClInclude Include="Include\seq_list.h" />
   </ItemGroup>
