@@ -1,5 +1,5 @@
 #pragma once
-#define SIZE_TYPE int
+#include <optional>
 
 #include "exception_info.h"
 #include "basic_list.h"
@@ -11,22 +11,17 @@ class SeqList : BasicList<T>
 public:
 	using Val_t = T;
 	using Ref_t = T&;
-	using Size_t = int;
-
-//SeqList构造函数、析构函数
+	using Size_t = SIZE_TYPE;
+	using Index_t = INDEX_TYPE;
+	using Index_Ret_Val_t = INDEX_RET_VAL_TYPE;
+	
+//构造函数、析构函数
 public:
 	SeqList(Size_t m = 0);
+	SeqList(const SeqList<T>& rSeqL);
 	SeqList(Size_t m, const T& val = T());
-	SeqList(std::initializer_list<Val_t> vList);
-	/*
-	使用模板变长参数实现的构造函数，因与SeqList(Size_t n, const T& val = T())冲突，
-	故舍弃，改为SeqList(std::initializer_list<Val_t> vList)实现。
-	代码：
-		template<typename ...Vals_t>
-		SeqList(Vals_t... vals) :vals {vals...}
-		{ size = sizeof...(Vals_t); }
-	*/
-	~SeqList() {};
+	SeqList(const std::initializer_list<Val_t>& vList);
+	~SeqList();
 
 //字段
 private:
@@ -46,29 +41,33 @@ public:
 	//清空表
 	void Clear();
 	//获取固定位置的引用
-	Ref_t At(Size_t n);
+	Ref_t At(Index_t n);
 	//获取固定位置的值
-	Val_t Get(Size_t n)const;
-	//更改固定位置的值
-	bool Set(Size_t n, const Val_t& v);
+	Val_t Get(Index_t n)const;
+	//更改固定位置的值, 当前值与更改值相同时返回false;
+	bool Set(Index_t n, const Val_t& v);
 	//查找元素并返回其位置
-	Size_t Find(const Val_t& v)const;
+	Index_Ret_Val_t Find(const Val_t& v)const;
 	//查找元素并返回其前驱元素位置
-	Size_t FindValuePrior(const Val_t& v)const;
+	Index_Ret_Val_t FindValuePrior(const Val_t& v)const;
 	//查找元素并返回其后继元素位置
-	Size_t FindValueNext(const Val_t& v)const;
+	Index_Ret_Val_t FindValueNext(const Val_t& v)const;
 	//插入
-	bool Insert(Size_t n, const Val_t& v);
+	bool Insert(Index_t n, const Val_t& v);
 	//删除
-	bool Erase(const Size_t& v);
+	bool Erase(const Index_t& v);
 	//尾部插入
 	bool push_back(const Val_t& v);
 	//尾部删除
 	bool pop_back(const Val_t& v);
+
+//私有方法
+private:
+	void CopyFrom(const SeqList<T>& rSeqL);
 };
 }
 template<typename T>
-MyDS::SeqList<T>::SeqList(Size_t m) :capacity(m)
+inline MyDS::SeqList<T>::SeqList(Size_t m) :capacity(m)
 {
 	size = 0;
 	if(m == 0)
@@ -77,7 +76,15 @@ MyDS::SeqList<T>::SeqList(Size_t m) :capacity(m)
 		vals = new T[m];
 }
 template<typename T>
-MyDS::SeqList<T>::SeqList(Size_t m, const T& val) :size(m), capacity(m)
+inline MyDS::SeqList<T>::SeqList(const SeqList<T>& rSeqL)
+{
+	size = 0;
+	capacity = 0;
+	vals = nullptr;
+	CopyFrom(rSeqL);
+}
+template<typename T>
+inline MyDS::SeqList<T>::SeqList(Size_t m, const T& val) :size(m), capacity(m)
 {
 	if(m == 0)
 		vals = nullptr;
@@ -87,61 +94,114 @@ MyDS::SeqList<T>::SeqList(Size_t m, const T& val) :size(m), capacity(m)
 	for(Size_t i = 0; i < m; ++i)
 		vals[i] = val;
 }
-//
-//template<typename Val_t>
-//MyDS::SeqList<Val_t>::SeqList(std::initializer_list<Val_t> vList)
-//{
-//	THROW_OUT_OF_RANGE_IF(!(vList.size() < MAX_SIZE), "SeqList<T> maximum capacity is 100.");
-//	std::copy(vList.begin(), vList.end(), vals);
-//	size = vList.size();
-//}
-//
-//template<typename Val_t>
-//Val_t MyDS::SeqList<Val_t>::At(size_t n) 
-//{
-//	THROW_OUT_OF_RANGE_IF(!(n < size), "SeqList<T>::At() subscript out of range.");
-//	return vals[n];
-//}
-//
-//template<typename Val_t>
-//size_t MyDS::SeqList<Val_t>::Size() { return this->size; }
+template<typename T>
+inline MyDS::SeqList<T>::SeqList(const std::initializer_list<Val_t>& vList) :size(vList.size()), capacity(vList.size())
+{
+	vals = new T[vList.size() + 1];
+	int n = 0;
+	for(auto& i : vList)
+		vals[n++] = i;
+}
+template<typename T>
+inline MyDS::SeqList<T>::~SeqList()
+{ delete[]vals; }
+
+template<typename Val_t>
+inline Val_t& MyDS::SeqList<Val_t>::front()
+{
+	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T> is empty.");
+	return vals[0];
+}
+
+template<typename Val_t>
+Val_t& MyDS::SeqList<Val_t>::back(){}
 
 //判断是否为空表
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::IsEmpty()const{}
+inline bool MyDS::SeqList<Val_t>::IsEmpty()const
+{ return size == 0 ? true : false; }
 //求表长
 template<typename Val_t>
-SIZE_TYPE MyDS::SeqList<Val_t>::Size()const{}
+inline SIZE_TYPE MyDS::SeqList<Val_t>::Size()const
+{ return size; }
 //清空表
 template<typename Val_t>
-void MyDS::SeqList<Val_t>::Clear(){}
+inline void MyDS::SeqList<Val_t>::Clear(){}
 //获取固定位置的引用
 template<typename Val_t>
-Val_t& MyDS::SeqList<Val_t>::At(Size_t n){}
+inline Val_t& MyDS::SeqList<Val_t>::At(Index_t n)
+{
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::At() subscript out of range.");
+	return vals[n];
+}
 //获取固定位置的值
 template<typename Val_t>
-Val_t MyDS::SeqList<Val_t>::Get(Size_t n)const{}
-//更改固定位置的值
+inline Val_t MyDS::SeqList<Val_t>::Get(Index_t n)const
+{
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Get() subscript out of range.");
+	return vals[n];
+}
+//更改固定位置的值, 当前值与更改值相同时返回false;
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::Set(Size_t n, const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::Set(Index_t n, const Val_t& v)
+{
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Set() subscript out of range.");
+	if(v == vals[n])
+		return false;
+	else
+	{
+		vals[n] = v;
+		return true;
+	}
+}
 //查找元素并返回其位置
 template<typename Val_t>
-SIZE_TYPE MyDS::SeqList<Val_t>::Find(const Val_t& v)const{}
+inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::Find(const Val_t& v)const
+{
+	Val_t* p = vals;
+	int i = 0;
+	while(i < size && *p != v)
+	{
+		++p;
+		++i;
+	}
+	if(i < size)
+		return std::make_optional<INDEX_TYPE>(i);
+	return INDEX_RET_ERROR_VAL;
+}
 //查找元素并返回其前驱元素位置
 template<typename Val_t>
-SIZE_TYPE MyDS::SeqList<Val_t>::FindValuePrior(const Val_t& v)const{}
+inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValuePrior(const Val_t& v)const
+{ 
+	auto opt = Find(v);
+	return opt == 0 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : std::make_optional<INDEX_TYPE>(--opt.value());
+}
 //查找元素并返回其后继元素位置
 template<typename Val_t>
-SIZE_TYPE MyDS::SeqList<Val_t>::FindValueNext(const Val_t& v)const{}
+inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValueNext(const Val_t& v)const
+{ 
+	auto opt = Find(v);
+	return opt == size - 1 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : std::make_optional<INDEX_TYPE>(++opt.value());
+}
 //插入
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::Insert(Size_t n, const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::Insert(Index_t n, const Val_t& v)
+{
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Get() subscript out of range.");
+}
 //删除
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::Erase(const Size_t& v){}
+inline bool MyDS::SeqList<Val_t>::Erase(const Index_t& v){}
 //尾部插入
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::push_back(const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::push_back(const Val_t& v){}
 //尾部删除
 template<typename Val_t>
-bool MyDS::SeqList<Val_t>::pop_back(const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::pop_back(const Val_t& v){}
+
+//复制
+template<typename T>
+inline void MyDS::SeqList<T>::CopyFrom(const SeqList<T>& rSeqL)
+{
+
+}
