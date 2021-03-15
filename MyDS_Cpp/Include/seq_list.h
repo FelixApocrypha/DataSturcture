@@ -159,7 +159,7 @@ template<typename Val_t>
 inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::Find(const Val_t& v)const
 {
 	Val_t* p = vals;
-	int i = 0;
+	INDEX_TYPE i = 0;
 	while(i < size && *p != v)
 	{
 		++p;
@@ -174,14 +174,14 @@ template<typename Val_t>
 inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValuePrior(const Val_t& v)const
 { 
 	auto opt = Find(v);
-	return opt == 0 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : std::make_optional<INDEX_TYPE>(--opt.value());
+	return opt == 0 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : MAKE_INDEX_RET_VAL(--opt.value());
 }
 //查找元素并返回其后继元素位置
 template<typename Val_t>
 inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValueNext(const Val_t& v)const
 { 
 	auto opt = Find(v);
-	return opt == size - 1 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : std::make_optional<INDEX_TYPE>(++opt.value());
+	return opt == size - 1 || opt == INDEX_RET_ERROR_VAL ? INDEX_RET_ERROR_VAL : MAKE_INDEX_RET_VAL(++opt.value());
 }
 //插入
 template<typename Val_t>

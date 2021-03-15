@@ -5,6 +5,7 @@
 #define INDEX_TYPE size_t
 #define INDEX_RET_VAL_TYPE std::optional<INDEX_TYPE>
 #define INDEX_RET_ERROR_VAL std::nullopt
+#define MAKE_INDEX_RET_VAL(val) std::make_optional<INDEX_TYPE>(val)
 
 namespace MyDS
 {
