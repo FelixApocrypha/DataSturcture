@@ -29,11 +29,11 @@ public:
 	//清空表
 	virtual void Clear() = 0;
 	//获取固定位置的引用
-	virtual Ref_t At(Index_t n) = 0;
+	virtual Ref_t At(const Index_t& n) = 0;
 	//获取固定位置的值
-	virtual Val_t Get(Index_t n)const = 0;
+	virtual Val_t Get(const Index_t& n)const = 0;
 	//更改固定位置的值, 当前值与更改值相同时返回false;
-	virtual bool Set(Index_t n, const Val_t& v) = 0;
+	virtual bool Set(const Index_t& n, const Val_t& v) = 0;
 	//查找元素并返回其位置
 	virtual Index_Ret_Val_t Find(const Val_t& v)const = 0;
 	//查找元素并返回其前驱元素位置
@@ -41,13 +41,13 @@ public:
 	//查找元素并返回其后继元素位置
 	virtual Index_Ret_Val_t FindValueNext(const Val_t& v)const = 0;
 	//插入
-	virtual bool Insert(Index_t n, const Val_t& v) = 0;
+	virtual bool Insert(const Index_t& n, const Val_t& v) = 0;
 	//删除
-	virtual bool Erase(const Index_t& v) = 0;
+	virtual bool Erase(const Index_t& n) = 0;
 	//尾部插入
-	virtual bool push_back(const Val_t& v) = 0;
+	virtual bool PushBack(const Val_t& v) = 0;
 	//尾部删除
-	virtual bool pop_back(const Val_t& v) = 0;
+	virtual bool PopBack(const Val_t& v) = 0;
 	//遍历操作，F为自定义函数
 	//template<typename F>
 	//virtual void Foreach(const F& f) = 0;
