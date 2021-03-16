@@ -200,10 +200,9 @@ inline bool MyDS::SeqList<Val_t>::Insert(const Index_t& n, const Val_t& v)
 		tmp = nullptr;
 		capacity += 10;
 	}
-	Val_t* ptr_1;
-	Val_t* ptr_2;
-	ptr_1 = &vals[n];
-	for(ptr_2 = &vals[size - 1]; ptr_2 >= ptr_1; --ptr_2)
+	Val_t* ptr_1 = &vals[n];
+	Val_t* ptr_2 = &vals[size - 1];
+	for(; ptr_2 >= ptr_1; --ptr_2)
 		*(ptr_2 + 1) = *ptr_2;
 	*ptr_1 = v;
 	++size;
