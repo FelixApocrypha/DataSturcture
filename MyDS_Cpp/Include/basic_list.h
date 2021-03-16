@@ -47,7 +47,7 @@ public:
 	//尾部插入
 	virtual bool PushBack(const Val_t& v) = 0;
 	//尾部删除
-	virtual bool PopBack(const Val_t& v) = 0;
+	virtual bool PopBack() = 0;
 	//遍历操作，F为自定义函数
 	//template<typename F>
 	//virtual void Foreach(const F& f) = 0;

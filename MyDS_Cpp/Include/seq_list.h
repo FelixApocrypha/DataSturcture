@@ -59,7 +59,7 @@ public:
 	//尾部插入
 	bool PushBack(const Val_t& v);
 	//尾部删除
-	bool PopBack(const Val_t& v);
+	bool PopBack();
 
 //私有方法
 private:
@@ -166,7 +166,7 @@ inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::Find(const Val_t& v)const
 		++i;
 	}
 	if(i < size)
-		return std::make_optional<INDEX_TYPE>(i);
+		return MAKE_INDEX_RET_VAL(i);
 	return INDEX_RET_ERROR_VAL;
 }
 //查找元素并返回其前驱元素位置
@@ -187,7 +187,7 @@ inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValueNext(const Val_t& v)con
 template<typename Val_t>
 inline bool MyDS::SeqList<Val_t>::Insert(const Index_t& n, const Val_t& v)
 {
-	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Get() subscript out of range.");
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Insert() subscript out of range.");
 	if(size >= capacity)
 	{
 		Val_t* tmp = new Val_t[capacity + 10];
@@ -200,23 +200,47 @@ inline bool MyDS::SeqList<Val_t>::Insert(const Index_t& n, const Val_t& v)
 		tmp = nullptr;
 		capacity += 10;
 	}
-	Val_t* ptr_1 = &vals[n];
-	Val_t* ptr_2 = &vals[size - 1];
-	for(; ptr_2 >= ptr_1; --ptr_2)
-		*(ptr_2 + 1) = *ptr_2;
-	*ptr_1 = v;
+	Val_t* pos = &vals[n];
+	for(Val_t* ptr = &vals[size - 1]; ptr >= pos; --ptr)
+		*(ptr + 1) = *ptr;
+	*pos = v;
 	++size;
 	return true;
 }
 //删除
 template<typename Val_t>
-inline bool MyDS::SeqList<Val_t>::Erase(const Index_t& v){}
+inline bool MyDS::SeqList<Val_t>::Erase(const Index_t& n)
+{
+	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Erase() subscript out of range.");
+	Val_t* end = vals + size - 1;
+	for(Val_t* ptr = &vals[n + 1]; ptr <= end; ++ptr)
+		*(ptr - 1) = *ptr;
+	--size;
+	return true;
+}
 //尾部插入
 template<typename Val_t>
-inline bool MyDS::SeqList<Val_t>::PushBack(const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::PushBack(const Val_t& v)
+{
+	if(size >= capacity)
+	{
+		Val_t* tmp = new Val_t[capacity + 10];
+		if(tmp == nullptr)
+			return false;
+		for(size_t i = 0; i < size; ++i)
+			tmp[i] = vals[i];
+		delete[] vals;
+		vals = tmp;
+		tmp = nullptr;
+		capacity += 10;
+	}
+	vals[size++] = v;
+	return true;
+}
 //尾部删除
 template<typename Val_t>
-inline bool MyDS::SeqList<Val_t>::PopBack(const Val_t& v){}
+inline bool MyDS::SeqList<Val_t>::PopBack()
+{ size -= 1; }
 
 //复制
 template<typename T>
