@@ -1,8 +1,8 @@
 #pragma once
+#include "myds_basic.h"
 #include <stdexcept>
 
-namespace MyDS
-{
+MyDS_BEGIN
 #define THROW_LENGTH_ERROR_IF(expr, what) \
   if ((expr)) throw std::length_error(what)
 
@@ -11,4 +11,4 @@ namespace MyDS
 
 #define THROW_RUNTIME_ERROR_IF(expr, what) \
   if ((expr)) throw std::runtime_error(what)
-}
+MyDS_END

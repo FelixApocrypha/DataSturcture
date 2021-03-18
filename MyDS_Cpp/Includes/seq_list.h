@@ -1,10 +1,11 @@
 #pragma once
 #include <optional>
 
+#include "myds_basic.h"
 #include "exception_info.h"
+
 #include "basic_list.h"
-namespace MyDS
-{
+MyDS_BEGIN
 template<typename T>
 class SeqList : BasicList<T>
 {
@@ -17,7 +18,7 @@ public:
 	
 //构造函数、析构函数
 public:
-	SeqList(Size_t m = 0);
+	SeqList(const Size_t& m = 0);
 	SeqList(const SeqList<T>& rSeqL);
 	SeqList(const Size_t& m, const T& val = T());
 	SeqList(const std::initializer_list<Val_t>& vList);
@@ -65,9 +66,10 @@ public:
 private:
 	void CopyFrom(const SeqList<T>& rSeqL);
 };
-}
+MyDS_END
+
 template<typename T>
-inline MyDS::SeqList<T>::SeqList(Size_t m) :capacity(m)
+inline MyDS::SeqList<T>::SeqList(const Size_t& m) :capacity(m)
 {
 	size = 0;
 	if(m == 0)
@@ -90,7 +92,6 @@ inline MyDS::SeqList<T>::SeqList(const Size_t& m, const T& val) :size(m), capaci
 		vals = nullptr;
 	else
 		vals = new T[m];
-
 	for(Size_t i = 0; i < m; ++i)
 		vals[i] = val;
 }
@@ -106,15 +107,20 @@ template<typename T>
 inline MyDS::SeqList<T>::~SeqList()
 { delete[]vals; }
 
+//取表头
 template<typename Val_t>
 inline Val_t& MyDS::SeqList<Val_t>::front()
 {
 	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T> is empty.");
 	return vals[0];
 }
-
+//取表尾
 template<typename Val_t>
-Val_t& MyDS::SeqList<Val_t>::back(){}
+Val_t& MyDS::SeqList<Val_t>::back()
+{
+	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T> is empty.");
+	return vals[size - 1];
+}
 
 //判断是否为空表
 template<typename Val_t>
@@ -126,7 +132,8 @@ inline SIZE_TYPE MyDS::SeqList<Val_t>::Size()const
 { return size; }
 //清空表
 template<typename Val_t>
-inline void MyDS::SeqList<Val_t>::Clear(){}
+inline void MyDS::SeqList<Val_t>::Clear()
+{ size = 0; }
 //获取固定位置的引用
 template<typename Val_t>
 inline Val_t& MyDS::SeqList<Val_t>::At(const Index_t& n)
@@ -240,7 +247,11 @@ inline bool MyDS::SeqList<Val_t>::PushBack(const Val_t& v)
 //尾部删除
 template<typename Val_t>
 inline bool MyDS::SeqList<Val_t>::PopBack()
-{ size -= 1; }
+{
+	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T>::Insert() is empty.");
+	size -= 1;
+	return true;
+}
 
 //复制
 template<typename T>

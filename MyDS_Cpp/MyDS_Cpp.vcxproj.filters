@@ -5,29 +5,41 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="MyDS_Examples">
+      <UniqueIdentifier>{9c5cb30c-be2d-4b73-a403-901c9223a349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyDS_Includes">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyDS_Cpp.cpp">
+    <ClCompile Include="MyDS.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\seq_list.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Examples\seqlist_ex.h">
+      <Filter>MyDS_Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Include\exception_info.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Includes\myds_basic.h">
+      <Filter>MyDS_Includes</Filter>
     </ClInclude>
-    <ClInclude Include="Include\basic_list.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Includes\basic_list.h">
+      <Filter>MyDS_Includes</Filter>
     </ClInclude>
+    <ClInclude Include="Includes\exception_info.h">
+      <Filter>MyDS_Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\seq_list.h">
+      <Filter>MyDS_Includes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

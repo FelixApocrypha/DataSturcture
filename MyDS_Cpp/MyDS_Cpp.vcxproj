@@ -142,12 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MyDS_Cpp.cpp" />
+    <ClCompile Include="MyDS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\basic_list.h" />
-    <ClInclude Include="Include\exception_info.h" />
-    <ClInclude Include="Include\seq_list.h" />
+    <ClInclude Include="Examples\seqlist_ex.h" />
+    <ClInclude Include="Includes\basic_list.h" />
+    <ClInclude Include="Includes\exception_info.h" />
+    <ClInclude Include="Includes\myds_basic.h" />
+    <ClInclude Include="Includes\seq_list.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
