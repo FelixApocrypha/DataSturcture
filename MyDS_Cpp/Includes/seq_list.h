@@ -18,9 +18,8 @@ public:
 	
 //构造函数、析构函数
 public:
-	SeqList(const Size_t& m = 0);
 	SeqList(const SeqList<T>& rSeqL);
-	SeqList(const Size_t& m, const T& val = T());
+	SeqList(const Size_t& m = 0, const T& val = T());
 	SeqList(const std::initializer_list<Val_t>& vList);
 	~SeqList();
 
@@ -68,15 +67,6 @@ private:
 };
 MyDS_END
 
-template<typename T>
-inline MyDS::SeqList<T>::SeqList(const Size_t& m) :capacity(m)
-{
-	size = 0;
-	if(m == 0)
-		vals = nullptr;
-	else
-		vals = new T[m];
-}
 template<typename T>
 inline MyDS::SeqList<T>::SeqList(const SeqList<T>& rSeqL)
 {
