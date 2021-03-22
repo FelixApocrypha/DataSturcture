@@ -4,3 +4,4 @@
 #define MyDS_END }
 #define MyDS_BEGIN namespace MyDS {
 #define MyDS_EX_BEGIN namespace EX {
+#define MyDS_Ex_BEGIN namespace Ex {
