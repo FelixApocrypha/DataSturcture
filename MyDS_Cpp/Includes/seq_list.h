@@ -60,20 +60,19 @@ public:
 	bool PushBack(const Val_t& v);
 	//尾部删除
 	bool PopBack();
-
-//私有方法
-private:
-	void CopyFrom(const SeqList<T>& rSeqL);
 };
 MyDS_END
 
 template<typename T>
 inline MyDS::SeqList<T>::SeqList(const SeqList<T>& rSeqL)
 {
-	size = 0;
-	capacity = 0;
-	vals = nullptr;
-	CopyFrom(rSeqL);
+	size = rSeqL.size;
+	capacity = rSeqL.capacity;
+	vals = new Val_t[size];
+
+	Val_t* vPtr = rSeqL.vals;
+	for(int i = 0; i < rSeqL.size; ++i)
+		vals[i] = *(vPtr++);
 }
 template<typename T>
 inline MyDS::SeqList<T>::SeqList(const Size_t& m, const T& val) :size(m), capacity(m)
@@ -241,11 +240,4 @@ inline bool MyDS::SeqList<Val_t>::PopBack()
 	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T>::Insert() is empty.");
 	size -= 1;
 	return true;
-}
-
-//复制
-template<typename T>
-inline void MyDS::SeqList<T>::CopyFrom(const SeqList<T>& rSeqL)
-{
-
 }
