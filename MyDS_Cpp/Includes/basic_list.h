@@ -1,5 +1,7 @@
 #pragma once
 #include <optional>
+#include "myds_basic.h"
+#include "exception_info.h"
 
 #define SIZE_TYPE size_t
 #define INDEX_TYPE size_t
@@ -7,8 +9,7 @@
 #define INDEX_RET_ERROR_VAL std::nullopt
 #define MAKE_INDEX_RET_VAL(val) std::make_optional<INDEX_TYPE>(val)
 
-namespace MyDS
-{
+MyDS_BEGIN
 template<typename T>
 class BasicList
 {
@@ -52,4 +53,4 @@ public:
 	//template<typename F>
 	//virtual void Foreach(const F& f) = 0;
 };
-}
+MyDS_END

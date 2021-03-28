@@ -1,9 +1,4 @@
 #pragma once
-#include <optional>
-
-#include "myds_basic.h"
-#include "exception_info.h"
-
 #include "basic_list.h"
 MyDS_BEGIN
 template<typename T>
@@ -38,6 +33,8 @@ public:
 	bool IsEmpty()const;
 	//求表长
 	Size_t Size()const;
+	//求最大容量
+	Size_t Capacity()const;
 	//清空表
 	void Clear();
 	//获取固定位置的引用
@@ -60,6 +57,9 @@ public:
 	bool PushBack(const Val_t& v);
 	//尾部删除
 	bool PopBack();
+
+	//重载==运算符
+	bool operator==(const SeqList<Val_t>& rSeqL);
 };
 MyDS_END
 
@@ -119,6 +119,10 @@ inline bool MyDS::SeqList<Val_t>::IsEmpty()const
 template<typename Val_t>
 inline SIZE_TYPE MyDS::SeqList<Val_t>::Size()const
 { return size; }
+//求最大容量
+template<typename T>
+inline SIZE_TYPE MyDS::SeqList<T>::Capacity() const
+{ return capacity; }
 //清空表
 template<typename Val_t>
 inline void MyDS::SeqList<Val_t>::Clear()
@@ -239,5 +243,18 @@ inline bool MyDS::SeqList<Val_t>::PopBack()
 {
 	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T>::Insert() is empty.");
 	size -= 1;
+	return true;
+}
+
+template<typename Val_t>
+inline bool MyDS::SeqList<Val_t>::operator==(const SeqList<Val_t>& rSeqL)
+{
+	if(this->size != rSeqL.Size())
+		return false;
+	for(int i = 0; i < size; ++i)
+	{
+		if(vals[i] != rSeqL.Get(i))
+			return false;
+	}
 	return true;
 }

@@ -4,3 +4,6 @@
 
 #define MyDS_Ex_BEGIN namespace Ex {
 #define MyDS_Ex_END }
+
+#define ExLOG std::cout
+#define ExLOG_BL ExLOG << "\n";
