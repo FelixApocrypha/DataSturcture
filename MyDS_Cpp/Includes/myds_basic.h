@@ -6,4 +6,6 @@
 #define MyDS_Ex_END }
 
 #define ExLOG std::cout
-#define ExLOG_BL ExLOG << "\n";
+#define ExLOG_BL std::cout << "\n";
+#define ExLOG_NL "\n";
+#define ExLOG_TAB "\t";

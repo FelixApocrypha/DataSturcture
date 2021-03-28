@@ -36,13 +36,13 @@ void MyDS::Ex::SeqListEx::Example()
 	ExSL sq4 = sq3;
 	//ExSL sq4(sq3), 等价;
 	ExLOG_BL
-	ExLOG << "遍历sq2、sq3、sq4: \n";
+	ExLOG << "遍历sq2、sq3、sq4: "<< ExLOG_NL
 	for(int i = 0; i < sq2.Size(); ++i)
 	{
-		ExLOG << "i == " << i << ":\t";
-		ExLOG << "sq2: " << sq2.At(i) << "\t";
-		ExLOG << "sq3: " << sq3.At(i) << "\t";
-		ExLOG << "sq4: " << sq4.At(i) << "\n";
+		ExLOG << "i==" << i << ExLOG_TAB
+		ExLOG << "sq2:" << sq2.At(i) << ExLOG_TAB
+		ExLOG << "sq3:" << sq3.At(i) << ExLOG_TAB
+		ExLOG << "sq4:" << sq4.At(i) << ExLOG_NL
 	}
 
 }
