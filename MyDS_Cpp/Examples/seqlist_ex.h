@@ -23,21 +23,21 @@ void MyDS::Ex::SeqListEx::Example()
 {
 	//初始化
 	//默认初始化
-	ExLOG << "默认初始化: ExSL sq1;\n";
+	ExLOG << "默认初始化: MyDS::SeqList<int> sq1;\n";
 	ExSL sq1;
 	//直接初始化
-	ExLOG << "直接初始化: ExSL sq2(5, 1);\n";
+	ExLOG << "直接初始化: MyDS::SeqList<int> sq2(5, 1);\n";
 	ExSL sq2(5, 1);
 	//列表初始化
-	ExLOG << "列表初始化: ExSL sq3 = {1,1,1,1,1};\n";
+	ExLOG << "列表初始化: MyDS::SeqList<int> sq3 = {1,1,1,1,1};\n";
 	ExSL sq3 = {1,1,1,1,1};
 	//拷贝初始化
-	ExLOG << "拷贝初始化: ExSL sq4 = sq3;\n";
+	ExLOG << "拷贝初始化: MyDS::SeqList<int> sq4 = sq3;\n";
 	ExSL sq4 = sq3;
 	//ExSL sq4(sq3), 等价;
 	ExLOG_BL
 	ExLOG << "遍历sq2、sq3、sq4: "<< ExLOG_NL
-	for(int i = 0; i < sq2.Size(); ++i)
+	for(size_t i = 0; i < sq2.Size(); ++i)
 	{
 		ExLOG << "i==" << i << ExLOG_TAB
 		ExLOG << "sq2:" << sq2.At(i) << ExLOG_TAB

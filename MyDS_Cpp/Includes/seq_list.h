@@ -13,7 +13,7 @@ public:
 	
 //构造函数、析构函数
 public:
-	SeqList(const Size_t& m = 0, const T& val = T());
+	explicit SeqList(const Size_t& m = 0, const T& val = T());
 
 	SeqList(const SeqList<T>& rSeqL);
 	SeqList(const std::initializer_list<T>& vList);
@@ -90,7 +90,7 @@ inline MyDS::SeqList<T>::SeqList(const SeqList<T>& rSeqL)
 	this->vals = new Val_t[size];
 
 	Val_t* vPtr = rSeqL.vals;
-	for(int i = 0; i < rSeqL.size; ++i)
+	for(size_t i = 0; i < rSeqL.size; ++i)
 		this->vals[i] = *(vPtr++);
 }
 template<typename T>
@@ -111,7 +111,7 @@ inline MyDS::SeqList<T>& MyDS::SeqList<T>::operator=(const MyDS::SeqList<T>& rSe
 		this->vals = new Val_t[size];
 
 		Val_t* vPtr = rSeqL.vals;
-		for(int i = 0; i < rSeqL.size; ++i)
+		for(size_t i = 0; i < rSeqL.size; ++i)
 			this->vals[i] = *(vPtr++);
 	}
 	return *this;
@@ -126,7 +126,7 @@ inline MyDS::SeqList<T>& MyDS::SeqList<T>::operator=(const std::initializer_list
 	int n = 0;
 	for(auto& i : vList)
 		this->vals[n++] = i;
-
+	return *this;
 }
 template<typename T>
 inline MyDS::SeqList<T>::~SeqList()
