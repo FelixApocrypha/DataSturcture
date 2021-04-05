@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
+#include "../Examples/myds_ex_basic.h"
 #include "../Includes/seq_list.h"
+using namespace MyDS::Ex;
 
-MyDS_BEGIN
 MyDS_Ex_BEGIN
 class SeqListEx
 {
@@ -44,9 +45,5 @@ void MyDS::Ex::SeqListEx::Example()
 		ExLOG << "sq3:" << sq3.At(i) << ExLOG_TAB
 		ExLOG << "sq4:" << sq4.At(i) << ExLOG_NL
 	}
-
 }
-
-
 MyDS_Ex_END
-MyDS_END

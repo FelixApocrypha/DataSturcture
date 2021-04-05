@@ -11,7 +11,7 @@
 
 MyDS_BEGIN
 template<typename T>
-class BasicList
+class ListBasic
 {
 public:
 	using Val_t = T;

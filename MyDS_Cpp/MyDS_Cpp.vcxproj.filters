@@ -29,7 +29,7 @@
     <ClInclude Include="Includes\myds_basic.h">
       <Filter>MyDS_Includes</Filter>
     </ClInclude>
-    <ClInclude Include="Includes\basic_list.h">
+    <ClInclude Include="Includes\list_basic.h">
       <Filter>MyDS_Includes</Filter>
     </ClInclude>
     <ClInclude Include="Includes\exception_info.h">
@@ -37,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="Includes\seq_list.h">
       <Filter>MyDS_Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\myds_ex_basic.h">
+      <Filter>MyDS_Examples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

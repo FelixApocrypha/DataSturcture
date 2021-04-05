@@ -1,8 +1,24 @@
 #pragma once
-#include "basic_list.h"
+#include "list_basic.h"
 MyDS_BEGIN
+
+//ForEach()
+#if _MSVC_LANG <= 201703L
+/*CXX17*/
+//SFINAE base enable_if for ForEach(lambda(T))
+template<typename F, typename T, typename = void>
+struct IsForEachFunc :std::false_type {};
+template<typename F, typename T>
+struct IsForEachFunc<F, T, std::void_t<decltype(std::declval<F>()(std::declval<T&>()))>> :std::true_type {};
+#else	//concept/require is great!
+/*CXX20*/
+//SFINAE base concept/require for ForEach(lambda(T))
+template<typename F, typename T>
+concept IsForEachFunc = requires(F func, T val) { func(val); };
+#endif // _MSVC_LANG <= 201703L
+
 template<typename T>
-class SeqList : BasicList<T>
+class SeqList : ListBasic<T>
 {
 public:
 	using Val_t = T;
@@ -66,8 +82,8 @@ public:
 	//重载==运算符
 	bool operator==(const SeqList<Val_t>& rSeqL);
 
-	//遍历操作
-	template<typename F>
+	//遍历
+	template<typename F>	/*CXX17 or CXX20*/
 	void ForEach(const F& func);
 };
 MyDS_END
@@ -156,8 +172,8 @@ template<typename Val_t>
 inline SIZE_TYPE MyDS::SeqList<Val_t>::Size()const
 { return this->size; }
 //求最大容量
-template<typename T>
-inline SIZE_TYPE MyDS::SeqList<T>::Capacity() const
+template<typename Val_t>
+inline SIZE_TYPE MyDS::SeqList<Val_t>::Capacity() const
 { return this->capacity; }
 //清空表
 template<typename Val_t>
@@ -281,11 +297,11 @@ inline bool MyDS::SeqList<Val_t>::PopBack()
 	this->size -= 1;
 	return true;
 }
-
+//重载==运算符
 template<typename Val_t>
 inline bool MyDS::SeqList<Val_t>::operator==(const SeqList<Val_t>& rSeqL)
 {
-	if(this->size != rSeqL.Size())
+	if(this->size != rSeqL.size)
 		return false;
 	for(int i = 0; i < this->size; ++i)
 	{
@@ -294,14 +310,47 @@ inline bool MyDS::SeqList<Val_t>::operator==(const SeqList<Val_t>& rSeqL)
 	}
 	return true;
 }
-
 //遍历操作
-template<typename Val_t>
-template<typename F>
+#if _MSVC_LANG <= 201703L	//constexpr if is great!
+
+template<typename Val_t>/*CXX17*/
+template<typename F/*,	
+		 typename std::enable_if_t<!IsForEachFunc<F, Val_t>::value, int> = 0*/>
 inline void MyDS::SeqList<Val_t>::ForEach(const F& func)
 {
-	Val_t* ptr = this->vals;
-	for(size_t i = 0; i < this->size; ++i)
-		func(*ptr++);
-	ptr = nullptr;
+	if constexpr(IsForEachFunc<F, Val_t>::value)
+	{
+		Val_t* ptr = this->vals;
+		for(size_t i = 0; i < this->size; ++i)
+			func(*ptr++);
+		ptr = nullptr;
+	} else
+	{
+		std::cout << "SFINAE: 参数非法" << '\n';
+	}
 }
+//template<typename F,	/*CXX17*/
+//		   typename std::enable_if_t<!IsForEachFunc<F, Val_t>::value, int> = 0>
+//inline void ForEach(const F& func)
+//{ std::cout << "SFINAE: 参数非法" << '\n'; }
+#else
+template<typename Val_t>
+template<typename F>	/*CXX20*/
+inline void MyDS::SeqList<Val_t>::ForEach(const F& func) //requires IsForEachFunc<F, Val_t>
+{
+	if constexpr(IsForEachFunc<F, Val_t>)
+	{
+		Val_t* ptr = this->vals;
+		for(size_t i = 0; i < this->size; ++i)
+			func(*ptr++);
+		ptr = nullptr;
+	} else
+	{
+		std::cout << "SFINAE: 参数非法" << '\n';
+	}
+}
+//template<typename F>	/*CXX20*/
+//inline void ForEach(const F& func) requires !IsForEachFunc<F, Val_t>
+//{ std::cout << "SFINAE: 参数非法" << '\n'; }
+
+#endif // _MSVC_LANG <= 201703L

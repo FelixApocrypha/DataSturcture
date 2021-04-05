@@ -1,8 +1,12 @@
 #pragma once
 #include "myds_basic.h"
 #include <stdexcept>
+#include <cassert>
 
 MyDS_BEGIN
+#define MYDS_DEBUG(expr) \
+  assert(expr) 
+
 #define THROW_LENGTH_ERROR_IF(expr, what) \
   if ((expr)) throw std::length_error(what)
 
