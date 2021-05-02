@@ -149,6 +149,7 @@
     <ClInclude Include="Examples\seqlist_ex.h" />
     <ClInclude Include="Includes\list_basic.h" />
     <ClInclude Include="Includes\exception_info.h" />
+    <ClInclude Include="Includes\list_basic_crtp.h" />
     <ClInclude Include="Includes\myds_basic.h" />
     <ClInclude Include="Includes\seq_list.h" />
   </ItemGroup>

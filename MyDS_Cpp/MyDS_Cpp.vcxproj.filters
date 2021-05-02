@@ -41,6 +41,9 @@
     <ClInclude Include="Examples\myds_ex_basic.h">
       <Filter>MyDS_Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Includes\list_basic_crtp.h">
+      <Filter>MyDS_Includes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

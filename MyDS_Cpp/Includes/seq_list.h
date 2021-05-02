@@ -1,5 +1,6 @@
 #pragma once
-#include "list_basic.h"
+//#include "list_basic.h"
+#include "list_basic_crtp.h"
 MyDS_BEGIN
 
 //ForEach()
@@ -18,7 +19,7 @@ concept IsForEachFunc = requires(F func, T val) { func(val); };
 #endif // _MSVC_LANG <= 201703L
 
 template<typename T>
-class SeqList : ListBasic<T>
+class SeqList : ListBasic<SeqList<T>, T>
 {
 public:
 	using Val_t = T;
