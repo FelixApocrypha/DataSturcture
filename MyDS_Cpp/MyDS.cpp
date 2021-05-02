@@ -10,6 +10,7 @@ int main()
     sq1.ForEach([](const std::string& x) { std::cout << x << '\n'; });
     sq1.ForEach([=](auto&& x) { x += a; std::cout << x << '\n'; });
     sq1.ForEach([=](auto&& x) { std::cout << x + a << '\n'; });
+    std::cout << "feature-CRTP brench test." << '\n';
     //std::cout << "This is My Data Sturcture of Cpp.\n";
     return 0;
 }
