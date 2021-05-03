@@ -19,7 +19,7 @@ concept IsForEachFunc = requires(F func, T val) { func(val); };
 #endif // _MSVC_LANG <= 201703L
 
 template<typename T>
-class SeqList : ListBasic<SeqList<T>, T>
+class SeqList : public ListBasic<SeqList<T>, T>
 {
 public:
 	using Val_t = T;
