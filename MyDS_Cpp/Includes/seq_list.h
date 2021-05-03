@@ -1,22 +1,7 @@
 #pragma once
-//#include "list_basic.h"
-#include "list_basic_crtp.h"
+//#include "../Discarded_Impl/[Discarded]_list_basic_crtp.h"
+#include "list_basic.h"
 MyDS_BEGIN
-
-//ForEach()
-#if _MSVC_LANG <= 201703L
-/*CXX17*/
-//SFINAE base enable_if for ForEach(lambda(T))
-template<typename F, typename T, typename = void>
-struct IsForEachFunc :std::false_type {};
-template<typename F, typename T>
-struct IsForEachFunc<F, T, std::void_t<decltype(std::declval<F>()(std::declval<T&>()))>> :std::true_type {};
-#else	//concept/require is great!
-/*CXX20*/
-//SFINAE base concept/require for ForEach(lambda(T))
-template<typename F, typename T>
-concept IsForEachFunc = requires(F func, T val) { func(val); };
-#endif // _MSVC_LANG <= 201703L
 
 template<typename T>
 class SeqList : public ListBasic<SeqList<T>, T>
@@ -311,9 +296,23 @@ inline bool MyDS::SeqList<Val_t>::operator==(const SeqList<Val_t>& rSeqL)
 	}
 	return true;
 }
-//遍历操作
-#if _MSVC_LANG <= 201703L	//constexpr if is great!
 
+//遍历操作
+#if _MSVC_LANG <= 201703L
+/*CXX17*/
+//SFINAE base enable_if for ForEach(lambda(T))
+template<typename F, typename T, typename = void>
+struct IsForEachFunc :std::false_type {};
+template<typename F, typename T>
+struct IsForEachFunc<F, T, std::void_t<decltype(std::declval<F>()(std::declval<T&>()))>> :std::true_type {};
+#else	//concept/require is great!
+/*CXX20*/
+//SFINAE base concept/require for ForEach(lambda(T))
+template<typename F, typename T>
+concept IsForEachFunc = requires(F func, T val) { func(val); };
+#endif // _MSVC_LANG <= 201703L
+
+#if _MSVC_LANG <= 201703L	//constexpr if is great!
 template<typename Val_t>/*CXX17*/
 template<typename F/*,	
 		 typename std::enable_if_t<!IsForEachFunc<F, Val_t>::value, int> = 0*/>

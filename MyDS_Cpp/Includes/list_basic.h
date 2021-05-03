@@ -1,3 +1,28 @@
+/*----------------------------------------------------------------------------
+ Copyright(c) 2019-2021 SnowyLake
+ All rights reserved.
+
+ @File:  list_basic.h
+ @State: Finished
+ @Version: 0.2
+
+ @Author: SnowyLake
+ @E-mail: Felix2000@foxmail.com
+
+ @Creation Time:  2021/04/06
+ @Abstract:
+	The base classes for SeqList and LinkList.
+
+ @Finished Time:  2021/05/03
+
+
+ @Change History:
+  <Date>      | <Version> | <Author>       | <Description>
+ ---------------------------------------------------------------------
+  2021/04/06  | 0.1       | SnowyLake      | Create file
+ ---------------------------------------------------------------------
+  2014/05/03  | 0.2       | SnowyLake      | Use CRTP for ForEach()
+----------------------------------------------------------------------------*/
 #pragma once
 #include <optional>
 #include "myds_basic.h"
@@ -10,7 +35,7 @@
 #define MAKE_INDEX_RET_VAL(val) std::make_optional<INDEX_TYPE>(val)
 
 MyDS_BEGIN
-template<typename T>
+template<typename Derived, typename T>
 class ListBasic
 {
 public:
@@ -50,7 +75,7 @@ public:
 	//尾部删除
 	virtual bool PopBack() = 0;
 	//遍历操作，F为自定义函数
-	//template<typename F>
-	//virtual void Foreach(const F& f) = 0;
+	template<typename F>
+	void Foreach(const F& f) { static_cast<Derived*>(this)->Foreach(f); }
 };
 MyDS_END

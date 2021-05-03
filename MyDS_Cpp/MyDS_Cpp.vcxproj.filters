@@ -16,6 +16,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="MyDS_Includes\Discarded">
+      <UniqueIdentifier>{c2bbf5e7-2b0a-4ddb-a6b1-af76b64a4d97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyDS.cpp">
@@ -41,8 +44,8 @@
     <ClInclude Include="Examples\myds_ex_basic.h">
       <Filter>MyDS_Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Includes\list_basic_crtp.h">
-      <Filter>MyDS_Includes</Filter>
+    <ClInclude Include="Discarded_Impl\[Discarded]_list_basic_crtp.h">
+      <Filter>MyDS_Includes\Discarded</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

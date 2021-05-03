@@ -1,15 +1,36 @@
-/*-------------------------------------------------------------------
- @list_basic_crtp.h Ver0.1
+/*----------------------------------------------------------------------------
+ Copyright(c) 2019-2021 SnowyLake
+ All rights reserved.
+
+ @File:  list_basic_crtp.h
+ @State: Discarded
+ @Version: 0.2
 
  @Author: SnowyLake
- @Creation Time: 2021/5/3
+ @E-mail: Felix2000@foxmail.com
+
+ @Creation Time:  2021/05/02
  @Abstract:
 	Use CRTP to define the base classes for SeqList and LinkList.
--------------------------------------------------------------------*/ 
+
+ @Discarded Time: 2021/05/03
+ @Reasons for Discarded£º
+	CRTP cannot Constraint the implementation of a subclass's
+	function like pure virtual function.
+	So only use it in ForEach().
+
+
+ @Change History:
+  <Date>      | <Version> | <Author>       | <Description>
+ ---------------------------------------------------------------
+  2021/05/02  | 0.1       | SnowyLake      | Create file
+ ---------------------------------------------------------------
+  2014/05/03  | 0.2       | SnowyLake      | Discarded
+----------------------------------------------------------------------------*/
 #pragma once
 #include <optional>
-#include "myds_basic.h"
-#include "exception_info.h"
+#include "../Includes/myds_basic.h"
+#include "../Includes/exception_info.h"
 
 #define SIZE_TYPE size_t
 #define INDEX_TYPE size_t
