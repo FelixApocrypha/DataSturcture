@@ -1,3 +1,30 @@
+/*----------------------------------------------------------------------------
+ Copyright(c) 2019-2021 SnowyLake
+ All rights reserved.
+
+ @File:  exception_info.h
+ @State: Finished
+ @Version: 0.2
+
+ @Author: SnowyLake
+ @E-mail: Felix2000@foxmail.com
+
+ @Creation Time:  2021/03/13
+ @Abstract:
+	Some macros in global about exception and debug.
+
+ @Finished Time:  2021/05/03
+
+
+ @Change History:
+ ========================================================================
+  <Date>		| <Version> | <Author>		| <Description>
+ ========================================================================
+  2021/03/13	| 0.1		| SnowyLake		| Create file
+ ------------------------------------------------------------------------
+  2021/05/05	| 0.2		| SnowyLake		| Add MYDS_DEBUG
+ ========================================================================
+----------------------------------------------------------------------------*/
 #pragma once
 #include "myds_basic.h"
 #include <stdexcept>

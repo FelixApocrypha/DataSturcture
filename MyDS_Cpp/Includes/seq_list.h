@@ -1,3 +1,33 @@
+/*----------------------------------------------------------------------------
+ Copyright(c) 2019-2021 SnowyLake
+ All rights reserved.
+
+ @File:  seq_list.h
+ @State: Finished
+ @Version: 0.3
+
+ @Author: SnowyLake
+ @E-mail: Felix2000@foxmail.com
+
+ @Creation Time:  2021/03/13
+ @Abstract:
+	The classes for SeqList.
+
+ @Finished Time:  2021/05/05
+
+
+ @Change History:
+ ========================================================================
+  <Date>		| <Version> | <Author>		| <Description>
+ ========================================================================
+  2021/03/13	| 0.1		| SnowyLake		| Create file
+ ------------------------------------------------------------------------
+  2021/05/03	| 0.2		| SnowyLake		| Use CRTP for ForEach()
+ ------------------------------------------------------------------------
+  2021/05/05	| 0.3		| SnowyLake		| Fixed Insert() subscript 
+				|			|				| out of range bug
+ ========================================================================
+----------------------------------------------------------------------------*/
 #pragma once
 //#include "../Discarded_Impl/[Discarded]_list_basic_crtp.h"
 #include "list_basic.h"
@@ -33,8 +63,8 @@ private:
 
 //方法
 public:
-	Ref_t front();	//首元素
-	Ref_t back();	//尾元素
+	Ref_t Front();	//首元素
+	Ref_t Back();	//尾元素
 
 	//判断是否为空表
 	bool IsEmpty()const;
@@ -136,14 +166,14 @@ inline MyDS::SeqList<T>::~SeqList()
 
 //取表头
 template<typename Val_t>
-inline Val_t& MyDS::SeqList<Val_t>::front()
+inline Val_t& MyDS::SeqList<Val_t>::Front()
 {
 	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T> is empty.");
 	return this->vals[0];
 }
 //取表尾
 template<typename Val_t>
-Val_t& MyDS::SeqList<Val_t>::back()
+Val_t& MyDS::SeqList<Val_t>::Back()
 {
 	THROW_OUT_OF_RANGE_IF(IsEmpty(), "SeqList<T> is empty.");
 	return this->vals[size - 1];
@@ -225,7 +255,7 @@ inline INDEX_RET_VAL_TYPE MyDS::SeqList<Val_t>::FindValueNext(const Val_t& v)con
 template<typename Val_t>
 inline bool MyDS::SeqList<Val_t>::Insert(const Index_t& n, const Val_t& v)
 {
-	THROW_OUT_OF_RANGE_IF((n < 0 || n >= size), "SeqList<T>::Insert() subscript out of range.");
+	THROW_OUT_OF_RANGE_IF((n < 0 || n > size), "SeqList<T>::Insert() subscript out of range.");
 	if(this->size >= this->capacity)
 	{
 		Val_t* tmp = new Val_t[this->capacity + 10];

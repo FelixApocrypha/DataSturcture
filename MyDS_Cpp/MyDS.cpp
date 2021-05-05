@@ -1,18 +1,29 @@
-﻿//This is a brench for CPTR
+﻿/*----------------------------------------------------------------------------
+ Copyright(c) 2019-2021 SnowyLake
+ All rights reserved.
+
+ @File:   MyDS.cpp
+
+ @Author: SnowyLake
+ @E-mail: Felix2000@foxmail.com
+
+ @Abstract:
+    Realization of basic data structure based on C++17 or C++20.
+    This project is an attempt for me to learn data structure and review
+    for postgraduate entrance examination.
+----------------------------------------------------------------------------*/
 
 #include <iostream>
 #include "Examples/seqlist_ex.h"
-#include "Includes/seq_list.h"
 int main()
 {
-    //MyDS::Ex::SeqListEx SeqL_Ex;
-    //SeqL_Ex.Example();
-    auto a = 1;
-    MyDS::SeqList<int> sq1 = {1,2,3};
-    sq1.ForEach([](const std::string& x) { std::cout << x << '\n'; });
-    sq1.ForEach([=](auto&& x) { x += a; std::cout << x << '\n'; });
-    sq1.ForEach([=](auto&& x) { std::cout << x + a << '\n'; });
-    //std::cout << "This is My Data Sturcture of Cpp.\n";
+    std::cout << "This is My Data Sturcture of Cpp.\n"
+              << "---------------------------------\n"
+              << '\n';
+
+    MyDS::Ex::SeqListEx SqL_Ex;
+    SqL_Ex.Example();
+    
     return 0;
 }
 

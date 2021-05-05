@@ -9,7 +9,7 @@
  @Author: SnowyLake
  @E-mail: Felix2000@foxmail.com
 
- @Creation Time:  2021/04/06
+ @Creation Time:  2021/03/13
  @Abstract:
 	The base classes for SeqList and LinkList.
 
@@ -17,11 +17,13 @@
 
 
  @Change History:
-  <Date>      | <Version> | <Author>       | <Description>
- ---------------------------------------------------------------------
-  2021/04/06  | 0.1       | SnowyLake      | Create file
- ---------------------------------------------------------------------
-  2014/05/03  | 0.2       | SnowyLake      | Use CRTP for ForEach()
+ ========================================================================
+  <Date>		| <Version> | <Author>		| <Description>
+ ========================================================================
+  2021/03/13	| 0.1		| SnowyLake		| Create file
+ ------------------------------------------------------------------------
+  2021/05/03	| 0.2		| SnowyLake		| Use CRTP for ForEach()
+ ========================================================================
 ----------------------------------------------------------------------------*/
 #pragma once
 #include <optional>
@@ -45,8 +47,8 @@ public:
 	using Index_t = INDEX_TYPE;
 	using Index_Ret_Val_t = INDEX_RET_VAL_TYPE;
 
-	virtual Ref_t front() = 0;	//首元素
-	virtual Ref_t back() = 0;	//尾元素
+	virtual Ref_t Front() = 0;	//首元素
+	virtual Ref_t Back() = 0;	//尾元素
 
 	//判断是否为空表
 	virtual bool IsEmpty()const = 0;
@@ -76,6 +78,6 @@ public:
 	virtual bool PopBack() = 0;
 	//遍历操作，F为自定义函数
 	template<typename F>
-	void Foreach(const F& f) { static_cast<Derived*>(this)->Foreach(f); }
+	void ForEach(const F& f) { static_cast<Derived*>(this)->Foreach(f); }
 };
 MyDS_END
