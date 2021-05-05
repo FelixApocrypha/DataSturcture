@@ -11,7 +11,7 @@
 
  @Creation Time:  2021/03/13
  @Abstract:
-	The base classes for SeqList and LinkList.
+	Some macros in global about exception and debug.
 
  @Finished Time:  2021/05/03
 
