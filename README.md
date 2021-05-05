@@ -6,7 +6,7 @@ ___
 #### Todo List:
 - [ ] List
   - [x] SeqList
-  - [ ] SeqList_Example
+  - [x] SeqList_Example
   - [ ] LinkList
   - [ ] LinkList_Example
 - [ ] Stack
