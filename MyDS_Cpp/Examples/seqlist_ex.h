@@ -53,7 +53,10 @@ void MyDS::Ex::SeqListEx::Example()
 		  << "This is Example for MyDS::SeqList<T>\t"
 		  << "T: " << typeid(MyDS::Ex::SeqListEx::Ex_t).name() <<'\n'
 		  << "----------------------------------------------\n";
-	ExLOG_BL
+	ExLOG_BL;
+
+	//开始计时
+	auto start = TIME_NOW;
 
 	//初始化
 	ExLOG << "---------------------Ex_1---------------------\n";
@@ -71,16 +74,16 @@ void MyDS::Ex::SeqListEx::Example()
 	// 拷贝初始化
 	ExLOG << "拷贝初始化: MyDS::SeqList<int> sq4 = sq3;\n";
 	ExSL sq4 = sq3;		// ExSL sq4(sq3), 等价;
-	ExLOG_BL
-	ExLOG << "遍历sq2、sq3、sq4: "<< ExLOG_NL
+	ExLOG_BL;
+	ExLOG << "遍历sq2、sq3、sq4: " << ExLOG_NL;
 	for(size_t i = 0; i < sq2.Size(); ++i)
 	{
-		ExLOG << "i==" << i << ExLOG_TAB
-		ExLOG << "sq2:" << sq2.At(i) << ExLOG_TAB
-		ExLOG << "sq3:" << sq3.At(i) << ExLOG_TAB
-		ExLOG << "sq4:" << sq4.At(i) << ExLOG_NL
+		ExLOG << "i==" << i << ExLOG_TAB;
+		ExLOG << "sq2:" << sq2.At(i) << ExLOG_TAB;
+		ExLOG << "sq3:" << sq3.At(i) << ExLOG_TAB;
+		ExLOG << "sq4:" << sq4.At(i) << ExLOG_NL;
 	}
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 求表头、表尾
 	ExLOG << "---------------------Ex_2---------------------\n";
@@ -90,7 +93,7 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << sq3.Front() << ExLOG_NL;
 	ExLOG << "求表尾: sq3.Back();\n";
 	ExLOG << sq3.Back() << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 判断是否空表
 	ExLOG << "---------------------Ex_3---------------------\n";
@@ -100,7 +103,7 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << std::boolalpha << sq1.IsEmpty() << ExLOG_NL;
 	ExLOG << "判断是否空表: sq2.IsEmpty();\n";
 	ExLOG << std::boolalpha << sq2.IsEmpty() << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 求表长、求最大容量, 尾部入栈、出栈
 	ExLOG << "---------------------Ex_4---------------------\n";
@@ -119,7 +122,7 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << "求表长: sq2.Size(); 求最大容量: sq2.Capapcity();\n";
 	ExLOG << sq2.Size() << ExLOG_NL;
 	ExLOG << sq2.Capacity() << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 清空表
 	ExLOG << "---------------------Ex_5---------------------\n";
@@ -138,7 +141,7 @@ void MyDS::Ex::SeqListEx::Example()
 	{
 		std::cerr << e.what() << ExLOG_NL;
 	}
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 指定位置元素访问
 	ExLOG << "---------------------Ex_6---------------------\n";
@@ -154,7 +157,7 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << "可读写访问(写入): sq2.At(0) = 1;" << ExLOG_NL;
 	sq2.At(0) = 1;
 	ExLOG << "sq2[0]: " << sq2.At(0) << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 
 	// ForEach()
 	ExLOG << "---------------------Ex_7---------------------\n";
@@ -162,20 +165,20 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << "----------------------------------------------\n";
 	ExLOG << "使用ForEach()遍历: sq2.ForEach([](auto&& x) { std::cout << x << ' '; });" << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "使用ForEach()使每个元素+1: sq2.ForEach([](auto&& x) { x += 1; });" << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { x += 1; });
 	ExLOG << "再次遍历: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
-	ExLOG_BL
+	ExLOG_BL;
+	ExLOG_BL;
 	// 查找
 	ExLOG << "---------------------Ex_8---------------------\n";
 	ExLOG << "查找" << ExLOG_NL;
 	ExLOG << "----------------------------------------------\n";
 	ExLOG << "遍历sq4: " << ExLOG_NL;
 	sq4.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在sq4中查找'3'的下标: sq4.Find(3).value();" << ExLOG_NL;
 	ExLOG << sq4.Find(3).value() << ExLOG_NL;
 	ExLOG << "在sq4中查找'9'的下标, 不存在, 抛出异常: " << ExLOG_NL;
@@ -186,7 +189,7 @@ void MyDS::Ex::SeqListEx::Example()
 	{
 		std::cerr << e.what() << ExLOG_NL;
 	}
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在sq4中查找'3'的前驱元素的下标: sq4.FindValuePrior(3).value();" << ExLOG_NL;
 	ExLOG << sq4.FindValuePrior(3).value() << ExLOG_NL;
 	ExLOG << "在sq4中查找'1'的前驱元素的下标, 不存在, 抛出异常: " << ExLOG_NL;
@@ -197,7 +200,7 @@ void MyDS::Ex::SeqListEx::Example()
 	{
 		std::cerr << e.what() << ExLOG_NL;
 	}
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在sq4中查找'3'的后继元素的下标: sq4.FindValueNext(3).value();" << ExLOG_NL;
 	ExLOG << sq4.FindValueNext(3).value() << ExLOG_NL;
 	ExLOG << "在sq4中查找'5'的后继元素的下标, 不存在, 抛出异常: " << ExLOG_NL;
@@ -208,7 +211,7 @@ void MyDS::Ex::SeqListEx::Example()
 	{
 		std::cerr << e.what() << ExLOG_NL;
 	}
-	ExLOG_BL
+	ExLOG_BL;
 
 	// 插入, 删除
 	ExLOG << "---------------------Ex_9---------------------\n";
@@ -216,12 +219,12 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << "----------------------------------------------\n";
 	ExLOG << "遍历sq2: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在下标为2的位置插入元素'0': sq2.Insert(2, 0);" << ExLOG_NL;
 	sq2.Insert(2, 0);
 	ExLOG << "遍历sq2: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在下标为7的位置插入元素, 下标越界, 抛出异常: " << ExLOG_NL;
 	try
 	{
@@ -232,12 +235,12 @@ void MyDS::Ex::SeqListEx::Example()
 	}
 	ExLOG << "遍历sq2: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在下标为2的位置删除元素: sq2.Erase(2);" << ExLOG_NL;
 	sq2.Erase(2);
 	ExLOG << "遍历sq2: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "在下标为6的位置删除元素, 下标越界, 抛出异常: " << ExLOG_NL;
 	try
 	{
@@ -248,8 +251,8 @@ void MyDS::Ex::SeqListEx::Example()
 	}
 	ExLOG << "遍历sq2: " << ExLOG_NL;
 	sq2.ForEach([](auto&& x) { ExLOG << x << ' '; });
-	ExLOG_BL
-	ExLOG_BL
+	ExLOG_BL;
+	ExLOG_BL;
 
 	// '=='比较
 	ExLOG << "---------------------Ex_9---------------------\n";
@@ -262,7 +265,7 @@ void MyDS::Ex::SeqListEx::Example()
 	MyDS::SeqList<int> sqB = {1,2,3,4,5,6};
 	ExLOG << "\tExLOG << std::boolalpha << (sqA == sqB) << ExLOG_NL;" << ExLOG_NL;
 	ExLOG << std::boolalpha << (sqA == sqB) << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 	ExLOG << "比较: "
 		  << "\tsqC = {\"A\",\"B\",\"C\"};\n"
 		  << "\tsqD = {\"A\",\"B\",\"D\"};\n"
@@ -279,10 +282,14 @@ void MyDS::Ex::SeqListEx::Example()
 	ExLOG << "\tExLOG << std::boolalpha << (sqE == sqF) << ExLOG_NL;" << ExLOG_NL;
 	ExLOG << std::boolalpha << (sqE == sqF) << ExLOG_NL;
 	ExLOG << "" << ExLOG_NL;
-	ExLOG_BL
+	ExLOG_BL;
 
+	//计时结束
+	auto end = TIME_NOW;
+	std::chrono::duration<double> elapsed = end - start;
 	ExLOG << "----------------------------------------------\n"
 		  << "                   The End.\n"
+		  << "              Elapsed: " << elapsed.count() <<"s\n"
 		  << "----------------------------------------------\n";
 }
 MyDS_Ex_END

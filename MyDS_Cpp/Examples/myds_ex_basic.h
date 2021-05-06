@@ -11,7 +11,7 @@
 
  @Creation Time:  2021/03/18
  @Abstract:
-    Some macros in example classes about debug log.
+    Some macros in example classes.
 
  @Finished Time:
 
@@ -28,11 +28,16 @@
 
 #pragma once
 #include <iostream>
+#include <chrono>
 #include "Includes/myds_basic.h"
 
 MyDS_Ex_BEGIN
+//debug log
 #define ExLOG std::cout
-#define ExLOG_BL std::cout << "\n";
-#define ExLOG_NL "\n";
-#define ExLOG_TAB "\t";
+#define ExLOG_BL std::cout << "\n"
+#define ExLOG_NL "\n"
+#define ExLOG_TAB "\t"
+
+//clock
+#define TIME_NOW std::chrono::system_clock::now()
 MyDS_Ex_END

@@ -319,7 +319,7 @@ inline bool MyDS::SeqList<Val_t>::operator==(const SeqList<Val_t>& rSeqL)
 {
 	if(this->size != rSeqL.size)
 		return false;
-	for(int i = 0; i < this->size; ++i)
+	for(size_t i = 0; i < this->size; ++i)
 	{
 		if(this->vals[i] != rSeqL.Get(i))
 			return false;
